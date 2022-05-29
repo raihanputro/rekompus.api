@@ -1,0 +1,25 @@
+{
+   "compilerOptions": {
+      "lib": [
+         "es5",
+         "es6"
+      ],
+      "target": "es5",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "./build",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true,
+      "strict": true,
+      "noImplicitAny": false,
+      "strictNullChecks": false,
+      "noImplicitThis": true,
+      "alwaysStrict": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": false,
+      "noImplicitReturns": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true
+   }
+}

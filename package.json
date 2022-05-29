@@ -1,0 +1,30 @@
+{
+   "name": "rekompus-api",
+   "version": "1.0.0",
+   "description": "Rekompus API Server",
+   "main": "index.ts",
+   "scripts": {
+      "serve": "nodemon",
+      "build": "tsc",
+      "start": "ts-node src/index.ts",
+      "typeorm": "typeorm-ts-node-commonjs"
+   },
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "cors": "^2.8.5",
+      "express": "^4.18.1",
+      "helmet": "^5.0.2",
+      "reflect-metadata": "^0.1.13",
+      "sqlite3": "^5.0.8",
+      "typeorm": "0.3.6"
+   },
+   "devDependencies": {
+      "@types/cors": "^2.8.12",
+      "@types/express": "^4.17.13",
+      "@types/node": "^16.11.10",
+      "nodemon": "^2.0.16",
+      "ts-node": "10.7.0",
+      "typescript": "4.5.2"
+   }
+}
