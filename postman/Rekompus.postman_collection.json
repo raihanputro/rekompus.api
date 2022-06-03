@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Sub Administrator\",\n    \"username\": \"subadmin\",\n    \"password\": \"welcome\"\n}",
+					"raw": "{\n    \"name\": \"Administrator\",\n    \"email\": \"admin@rekompus.id\",\n    \"password\": \"welcome\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -38,7 +38,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"welcome\"\n}",
+					"raw": "{\n    \"email\": \"admin@rekompus.id\",\n    \"password\": \"welcome\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
