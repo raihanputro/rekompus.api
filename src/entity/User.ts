@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm"
 import { Length, IsNotEmpty } from "class-validator"
 import bcrypt from 'bcryptjs'
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number
@@ -28,11 +28,13 @@ export class User {
     @UpdateDateColumn()
     updatedAt : String 
     
-    hashPassword() {
-      this.password = bcrypt.hashSync(this.password, 8);
+    checkIfPasswordMatch(password: string) {
+      return bcrypt.compareSync(password, this.password);
     }
-  
-    checkIfPasswordMatch(unencryptedPassword: string) {
-      return bcrypt.compareSync(unencryptedPassword, this.password);
+
+    @BeforeInsert()
+    async setPassword(password: string) {
+      const salt = await bcrypt.genSalt()
+      this.password = await bcrypt.hash(password || this.password, salt)
     }
 }
