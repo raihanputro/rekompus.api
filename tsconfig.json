@@ -4,7 +4,7 @@
          "es5",
          "es6"
       ],
-      "target": "es5",
+      "target": "es6",
       "module": "commonjs",
       "moduleResolution": "node",
       "outDir": "./build",
@@ -18,7 +18,7 @@
       "alwaysStrict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": false,
-      "noImplicitReturns": true,
+      "noImplicitReturns": false,
       "resolveJsonModule": true,
       "esModuleInterop": true
    }
