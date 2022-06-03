@@ -10,17 +10,17 @@ router.post(
   '/register',
   celebrate({
     body: Joi.object({
-      username: Joi.string().required(),
+      email: Joi.string().required().email(),
       name: Joi.string().required(),
       password: Joi.string().required()
     }),
   }),  
   async (req, res, next) => {
-    let { name, username, password } = req.body
+    let { name, email, password } = req.body
     
     const user = new User()
     user.name = name
-    user.username = username
+    user.email = email
     user.password= password
     await user.save()
 
@@ -32,18 +32,18 @@ router.post(
   '/login',
   celebrate({
     body: Joi.object({
-      username: Joi.string().required(),
+      email: Joi.string().required().email(),
       password: Joi.string().required(),
     }),
   }),  
   async (req, res, next) => {
-    let { username, password } = req.body
+    let { email, password } = req.body
 
     try {
-      const user = await User.findOneBy({ username: username });  
+      const user = await User.findOneBy({ email: email });  
 
       if (!user) {
-        res.json({ status: 0, message: 'Invalid username or password !' });
+        res.json({ status: 0, message: 'Invalid email or password !' });
       }
   
       if (!user.checkIfPasswordMatch(password)) {
@@ -51,7 +51,7 @@ router.post(
       }  
 
       const token = jwt.sign(
-        { username: username }
+        { email: email }
         , process.env.JWT_SECRET
         , { expiresIn: process.env.JWT_EXPIRATION, algorithm: 'HS256' }
         );
