@@ -1,9 +1,19 @@
-// import { Jurusan } from './../entity/Jurusan';
+// import { Jurusan } from './../entity/Jurusan'
 import { Router } from "express"
+import multer from 'multer'
 import { celebrate, Joi } from 'celebrate'
 import { Kampus } from '../entity/Kampus'
 
 const router  = Router()
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '.jpg')
+  }
+})
+const upload = multer({ storage: storage })
 
 router.get(
   '/kampus',
@@ -13,9 +23,9 @@ router.get(
         jurusan: true,
       }})
 
-      return res.json({ status: 1, data: kampus });
+      return res.json({ status: 1, data: kampus })
     } catch (e) {
-      return next(e);
+      return next(e)
     }    
   }
 )
@@ -23,7 +33,7 @@ router.get(
 router.get(
   '/kampus/:id',
   async (req, res, next) => {
-    const kampusId : number = parseInt(req.params.id);
+    const kampusId : number = parseInt(req.params.id)
     try {
       const kampus = await Kampus.find({
         relations: {
@@ -34,9 +44,9 @@ router.get(
         }
       })
 
-      return res.json({ status: 1, data: kampus });
+      return res.json({ status: 1, data: kampus })
     } catch (e) {
-      return next(e);
+      return next(e)
     }    
   }
 )
@@ -72,7 +82,7 @@ router.post(
       kampus.kelasTersedia = kelasTersedia
       await kampus.save()
 
-      res.json({ status: 1, data: kampus });
+      res.json({ status: 1, data: kampus })
     } catch (e) {
       return next(e)
     }
@@ -109,7 +119,33 @@ router.put(
       kampus.kelasTersedia = kelasTersedia
       await kampus.save()
 
-      res.json({ status: 1, data: kampus });
+      res.json({ status: 1, data: kampus })
+    } catch (e) {
+      return next(e)
+    }
+  }
+)
+
+router.post(
+  '/kampus/:id/pictureid',
+  upload.single('pictureid'),
+  async (req, res, next) => {
+    
+    try {
+      const file = req.file.path
+      console.log(file)
+      if (!file) {
+        res.json({ status: 0, message: "No File is selected." })
+      }
+
+      const kampus = await Kampus.findOneBy({
+        id: parseInt(req.params.id)
+      })
+
+      kampus.pictureId = req.file.filename
+      await kampus.save()
+
+      res.json({ status: 1, data: file })
     } catch (e) {
       return next(e)
     }

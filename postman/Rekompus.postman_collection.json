@@ -140,6 +140,69 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "api/kampus/id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"ITB\",\n    \"description\": \"Keterangan ITB\",\n    \"rating\": 4.8,\n    \"city\": \"Bandung\",\n    \"akreditasiKampus\": \"A\",\n    \"statusPmb\": \"Dibuka\",\n    \"kelasTersedia\": [\"Reguler\", \"Online\", \"Karyawan\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/kampus/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"kampus",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/kampus/id/pictureId",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pictureid",
+							"type": "file",
+							"src": "/home/danni/Pictures/Screenshot from 2022-02-15 15-36-50.png"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/kampus/1/pictureid",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"kampus",
+						"1",
+						"pictureid"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
