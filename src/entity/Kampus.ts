@@ -12,10 +12,10 @@ export class Kampus extends BaseEntity {
     @IsNotEmpty()
     name: String
 
-    @Column()
+    @Column({ nullable: true })
     description: String
 
-    @Column()
+    @Column({ nullable: true })
     pictureId?: String
 
     @Column()
@@ -27,7 +27,7 @@ export class Kampus extends BaseEntity {
     @Column()
     akreditasiKampus?: String
 
-    @Column()
+    @Column({ nullable: true })
     statusPmb?: String
 
     @Column("simple-array", { nullable: true })
