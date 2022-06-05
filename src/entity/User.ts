@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm"
+import { Index, Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm"
 import { Length, IsNotEmpty, IsEmail } from "class-validator"
 import bcrypt from 'bcryptjs'
 
@@ -10,17 +10,18 @@ export class User extends BaseEntity {
 
     @Column()
     @IsEmail()
+    @Index({ unique: true })
     @IsNotEmpty()
     email: string
 
     @Column()
     @Length(3, 100)
     @IsNotEmpty()
-    name: string
+    name: String
 
     @Column()
     @IsNotEmpty()
-    password: string
+    password: String
 
     @CreateDateColumn()
     createdAt : String

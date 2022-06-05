@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Register",
+			"name": "api/register",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -20,11 +20,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/register",
+					"raw": "{{baseUrl}}/api/register",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
+						"api",
 						"register"
 					]
 				}
@@ -32,7 +33,7 @@
 			"response": []
 		},
 		{
-			"name": "Login",
+			"name": "api/login",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -46,11 +47,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/login",
+					"raw": "{{baseUrl}}/api/login",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
+						"api",
 						"login"
 					]
 				}
@@ -58,17 +60,145 @@
 			"response": []
 		},
 		{
-			"name": "Logout",
+			"name": "api/logout",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/logout",
+					"raw": "{{baseUrl}}/api/logout",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
+						"api",
 						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/kampus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/kampus",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"kampus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/kampus/id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/kampus/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"kampus",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/kampus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Universitas Solo Raya\",\n    \"description\": \"Keterangan Solo\",\n    \"rating\": 4,\n    \"city\": \"Solo\",\n    \"akreditasiKampus\": \"C+\",\n    \"statusPmb\": \"Tutup\",\n    \"kelasTersedia\": [\"Reguler\"],\n    \"jurusan\": [\n        {\n            \"namaJurusan\": \"Teknik Informatika\",\n            \"jenjang\": \"S1\",\n            \"biayaSPP\": 450000,\n            \"akreditasi\": \"B\"  \n        },\n        {\n            \"namaJurusan\": \"Bahasa Sunda\",\n            \"jenjang\": \"S1\",\n            \"biayaSPP\": 150000,\n            \"akreditasi\": \"B\"  \n        }        \n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/kampus",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"kampus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/kampus/id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"ITB\",\n    \"description\": \"Keterangan ITB\",\n    \"rating\": 4.8,\n    \"city\": \"Bandung\",\n    \"akreditasiKampus\": \"A\",\n    \"statusPmb\": \"Dibuka\",\n    \"kelasTersedia\": [\"Reguler\", \"Online\", \"Karyawan\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/kampus/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"kampus",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/kampus/id/pictureId",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pictureid",
+							"type": "file",
+							"src": "/home/danni/Pictures/Screenshot from 2022-02-15 15-36-50.png"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/kampus/1/pictureid",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"kampus",
+						"1",
+						"pictureid"
 					]
 				}
 			},
@@ -108,7 +238,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "http://localhost:3000/api"
+			"value": "http://localhost:3000"
 		},
 		{
 			"key": "token",
