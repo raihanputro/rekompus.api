@@ -1,11 +1,12 @@
-import express, { NextFunction, Request, Response } from 'express'
-import { ValidationError } from 'class-validator'
+// import express, { NextFunction, Request, Response } from 'express'
+import express from 'express'
+// import { ValidationError } from 'class-validator'
 import 'reflect-metadata'
 import 'dotenv/config'
 import helmet from 'helmet'
 import cors from 'cors'
 import * as bodyParser from 'body-parser'
-import { isCelebrateError } from 'celebrate'
+// import { isCelebrateError } from 'celebrate'
 import { AppDataSource } from './data-source'
 import routes from './routes'
 
@@ -27,7 +28,7 @@ function main(){
   app.use('/', routes)
   app.use(`/${prefix}`, routes)
   
-  app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
+  /* app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
     if (isCelebrateError(err)) {
       return res.status(400).json({ error: 'Invalid data' }).end()
     } else if (err instanceof Array && err[0] instanceof ValidationError) {
@@ -44,7 +45,7 @@ function main(){
     } else {
       next(err)
     }
-  })
+  }) */
 
   AppDataSource.initialize()
 

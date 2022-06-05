@@ -5,33 +5,57 @@ import { Jurusan } from './Jurusan'
 @Entity()
 export class Kampus extends BaseEntity {
 
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @Column()
     @IsNotEmpty()
     name: String
 
-    @Column({ nullable: true })
+    @Column()
     description: String
 
     @Column({ nullable: true })
-    pictureId?: String
+    pictureId: String
 
     @Column()
     city: String
 
-    @Column('double')
-    rating: number
+    @Column()
+    alamat: String
 
     @Column()
-    akreditasiKampus?: String
+    telepon: String
+
+    @Column()
+    email: String
+
+    @Column()
+    tahunBerdiri: String
+
+    @Column()
+    linkPendaftaran: String
+
+    @Column()
+    jenisKampus: String
+
+    @Column()
+    akreditasiKampus: String
 
     @Column({ nullable: true })
-    statusPmb?: String
+    statusPmb: String
 
     @Column("simple-array", { nullable: true })
-    kelasTersedia?: string[]
+    kelasTersedia: string[]
+
+    @Column()
+    linkFb: String
+
+    @Column()
+    linkIg: String
+
+    @Column()
+    linkTwitter: String
 
     @OneToMany(() => Jurusan, (jurusan) => jurusan.kampus, { cascade: true })
     jurusan: Jurusan[]    
