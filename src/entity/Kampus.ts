@@ -33,7 +33,7 @@ export class Kampus extends BaseEntity {
     @Column("simple-array", { nullable: true })
     kelasTersedia?: string[]
 
-    @OneToMany(() => Jurusan, (jurusan) => jurusan.kampus)
+    @OneToMany(() => Jurusan, (jurusan) => jurusan.kampus, { cascade: true })
     jurusan: Jurusan[]    
 
     @CreateDateColumn()

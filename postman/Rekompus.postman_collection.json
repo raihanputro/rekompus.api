@@ -121,7 +121,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"ITB\",\n    \"description\": \"Keterangan ITB\",\n    \"rating\": 4.8,\n    \"city\": \"Bandung\",\n    \"akreditasiKampus\": \"A\",\n    \"statusPmb\": \"Dibuka\",\n    \"kelasTersedia\": [\"Reguler\", \"Online\"]\n}",
+					"raw": "{\n    \"name\": \"Universitas Solo Raya\",\n    \"description\": \"Keterangan Solo\",\n    \"rating\": 4,\n    \"city\": \"Solo\",\n    \"akreditasiKampus\": \"C+\",\n    \"statusPmb\": \"Tutup\",\n    \"kelasTersedia\": [\"Reguler\"],\n    \"jurusan\": [\n        {\n            \"namaJurusan\": \"Teknik Informatika\",\n            \"jenjang\": \"S1\",\n            \"biayaSPP\": 450000,\n            \"akreditasi\": \"B\"  \n        },\n        {\n            \"namaJurusan\": \"Bahasa Sunda\",\n            \"jenjang\": \"S1\",\n            \"biayaSPP\": 150000,\n            \"akreditasi\": \"B\"  \n        }        \n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"

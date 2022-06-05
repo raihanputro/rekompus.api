@@ -1,4 +1,3 @@
-// import { Jurusan } from './../entity/Jurusan'
 import { Router } from "express"
 import multer from 'multer'
 import { celebrate, Joi } from 'celebrate'
@@ -57,19 +56,21 @@ router.post(
     body: Joi.object({
       name: Joi.string().required(),
       description: Joi.string().required(),
-      // pictureId: Joi.string(),
       rating: Joi.number().required(),
       city: Joi.string().required(),
       akreditasiKampus: Joi.string().required(),
       statusPmb: Joi.string().required(),
-      kelasTersedia: Joi.array().items(Joi.string())
-      /* jurusan: Joi.array().items(Joi.object({
-        Jurusan
-      })) */
+      kelasTersedia: Joi.array().items(Joi.string()),
+      jurusan: Joi.array().items(Joi.object({
+        namaJurusan: Joi.string().required(),
+        jenjang: Joi.string().required(),
+        biayaSPP: Joi.number().required(),
+        akreditasi: Joi.string().required()
+      }))
     }),
-  }),  
+  }), 
   async (req, res, next) => {
-    let { name, description, rating, city, akreditasiKampus, statusPmb, kelasTersedia } = req.body
+    let { name, description, rating, city, akreditasiKampus, statusPmb, kelasTersedia, jurusan } = req.body
     
     try {
       const kampus = new Kampus()
@@ -80,6 +81,7 @@ router.post(
       kampus.akreditasiKampus = akreditasiKampus
       kampus.statusPmb = statusPmb
       kampus.kelasTersedia = kelasTersedia
+      kampus.jurusan = jurusan
       await kampus.save()
 
       res.json({ status: 1, data: kampus })
