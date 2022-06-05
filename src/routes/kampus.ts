@@ -1,6 +1,9 @@
 import { Router } from "express"
-import multer from 'multer'
 import { celebrate, Joi } from 'celebrate'
+// import jwt from "jsonwebtoken"
+import multer from 'multer'
+import { expressjwt } from "express-jwt"
+
 import { Kampus } from '../entity/Kampus'
 
 const router  = Router()
@@ -13,14 +16,14 @@ const storage = multer.diskStorage({
   }
 })
 const upload = multer({ storage: storage })
+const authRequired = expressjwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] })
 
 router.get(
   '/kampus',
+  authRequired,
   async (req, res, next) => {
     try {
-      const kampus = await Kampus.find({relations: {
-        jurusan: true,
-      }})
+      const kampus = await Kampus.find({relations: [ 'jurusan', 'jurusan.kelas' ]})
 
       return res.json({ status: 1, data: kampus })
     } catch (e) {
@@ -31,13 +34,12 @@ router.get(
 
 router.get(
   '/kampus/:id',
+  authRequired,
   async (req, res, next) => {
-    const kampusId : number = parseInt(req.params.id)
+    const kampusId = req.params.id
     try {
       const kampus = await Kampus.find({
-        relations: {
-          jurusan: true,
-        },
+        relations: [ 'jurusan', 'jurusan.kelas' ],
         where: {
           id: kampusId
         }
@@ -52,32 +54,71 @@ router.get(
 
 router.post(
   '/kampus',
-  celebrate({
-    body: Joi.object({
-      name: Joi.string().required(),
-      description: Joi.string().required(),
-      rating: Joi.number().required(),
-      city: Joi.string().required(),
-      akreditasiKampus: Joi.string().required(),
-      statusPmb: Joi.string().required(),
-      kelasTersedia: Joi.array().items(Joi.string()),
-      jurusan: Joi.array().items(Joi.object({
-        namaJurusan: Joi.string().required(),
-        jenjang: Joi.string().required(),
-        biayaSPP: Joi.number().required(),
-        akreditasi: Joi.string().required()
-      }))
-    }),
-  }), 
+  [
+    authRequired,
+    celebrate({
+      body: Joi.object({
+        name: Joi.string().required(),
+        description: Joi.string().required(),
+        city: Joi.string().required(),
+        alamat: Joi.string().required(),
+        telepon: Joi.string().allow(null, ''),
+        email: Joi.string().allow(null, ''),
+        tahunBerdiri: Joi.string().allow(null, ''),
+        linkPendaftaran: Joi.string().allow(null, ''),
+        linkFb: Joi.string().allow(null, ''),
+        linkIg: Joi.string().allow(null, ''),
+        linkTwitter: Joi.string().allow(null, ''),
+        jenisKampus: Joi.string().required(),
+        akreditasiKampus: Joi.string().required(),
+        statusPmb: Joi.string().required(),
+        kelasTersedia: Joi.array().items(Joi.string()),
+        jurusan: Joi.array().items(Joi.object({
+          namaJurusan: Joi.string().required(),
+          jenjang: Joi.string().required(),
+          akreditasi: Joi.string().required(),
+          kelas: Joi.array().items(Joi.object({
+            name: Joi.string().required(),
+            biayaSPP: Joi.number().required()
+          }))
+        }))
+      })
+    })
+  ],
   async (req, res, next) => {
-    let { name, description, rating, city, akreditasiKampus, statusPmb, kelasTersedia, jurusan } = req.body
+    let {
+      name,
+      description,
+      city,
+      alamat,
+      telepon,
+      email,
+      tahunBerdiri,
+      linkPendaftaran,
+      jenisKampus,
+      akreditasiKampus,
+      statusPmb,
+      kelasTersedia,
+      linkFb,
+      linkIg,
+      linkTwitter,
+      jurusan
+    } = req.body
     
     try {
       const kampus = new Kampus()
       kampus.name = name
       kampus.description = description
-      kampus.rating = rating
       kampus.city = city
+      kampus.alamat = alamat
+      kampus.telepon = telepon
+      kampus.email = email
+      kampus.tahunBerdiri = tahunBerdiri
+      kampus.linkPendaftaran = linkPendaftaran
+      kampus.linkFb = linkFb
+      kampus.linkIg = linkIg
+      kampus.linkTwitter = linkTwitter
+      kampus.jenisKampus = jenisKampus
       kampus.akreditasiKampus = akreditasiKampus
       kampus.statusPmb = statusPmb
       kampus.kelasTersedia = kelasTersedia
@@ -93,28 +134,29 @@ router.post(
 
 router.put(
   '/kampus/:id',
-  celebrate({
-    body: Joi.object({
-      name: Joi.string().required(),
-      description: Joi.string().required(),
-      rating: Joi.number().required(),
-      city: Joi.string().required(),
-      akreditasiKampus: Joi.string().required(),
-      statusPmb: Joi.string().required(),
-      kelasTersedia: Joi.array().items(Joi.string())
-    }),
-  }),  
+  [
+    authRequired,
+    celebrate({
+      body: Joi.object({
+        name: Joi.string().required(),
+        description: Joi.string().required(),
+        city: Joi.string().required(),
+        akreditasiKampus: Joi.string().required(),
+        statusPmb: Joi.string().required(),
+        kelasTersedia: Joi.array().items(Joi.string())
+      }),
+    })
+  ],
   async (req, res, next) => {
-    let { name, description, rating, city, akreditasiKampus, statusPmb, kelasTersedia } = req.body
+    let { name, description, city, akreditasiKampus, statusPmb, kelasTersedia } = req.body
     
     try {
       const kampus = await Kampus.findOneBy({
-        id: parseInt(req.params.id)
+        id: req.params.id
       })
  
       kampus.name = name
       kampus.description = description
-      kampus.rating = rating
       kampus.city = city
       kampus.akreditasiKampus = akreditasiKampus
       kampus.statusPmb = statusPmb
@@ -130,7 +172,10 @@ router.put(
 
 router.post(
   '/kampus/:id/pictureid',
-  upload.single('pictureid'),
+  [
+    authRequired, 
+    upload.single('pictureid')
+  ],
   async (req, res, next) => {
     
     try {
@@ -141,7 +186,7 @@ router.post(
       }
 
       const kampus = await Kampus.findOneBy({
-        id: parseInt(req.params.id)
+        id: req.params.id
       })
 
       kampus.pictureId = req.file.filename

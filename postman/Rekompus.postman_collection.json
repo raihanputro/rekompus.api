@@ -101,14 +101,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/api/kampus/1",
+					"raw": "{{baseUrl}}/api/kampus/b11a6d5f-f2f0-4c09-998d-1272599e9138",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
 						"kampus",
-						"1"
+						"b11a6d5f-f2f0-4c09-998d-1272599e9138"
 					]
 				}
 			},
@@ -121,7 +121,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Universitas Solo Raya\",\n    \"description\": \"Keterangan Solo\",\n    \"rating\": 4,\n    \"city\": \"Solo\",\n    \"akreditasiKampus\": \"C+\",\n    \"statusPmb\": \"Tutup\",\n    \"kelasTersedia\": [\"Reguler\"],\n    \"jurusan\": [\n        {\n            \"namaJurusan\": \"Teknik Informatika\",\n            \"jenjang\": \"S1\",\n            \"biayaSPP\": 450000,\n            \"akreditasi\": \"B\"  \n        },\n        {\n            \"namaJurusan\": \"Bahasa Sunda\",\n            \"jenjang\": \"S1\",\n            \"biayaSPP\": 150000,\n            \"akreditasi\": \"B\"  \n        }        \n    ]\n}",
+					"raw": "{\n    \"name\": \"Universitas Solo Raya\",\n    \"description\": \"Keterangan Solo\",\n    \"city\": \"Solo\",\n    \"alamat\": \"Alamat di solo\",\n    \"telepon\": \"\",\n    \"email\": \"\",\n    \"tahunBerdiri\": \"\",\n    \"linkPendaftaran\": \"\",\n    \"linkFb\": \"-\",\n    \"linkIg\": \"\",\n    \"linkTwitter\": \"\",\n    \"jenisKampus\": \"PTN\",\n    \"akreditasiKampus\": \"C+\",\n    \"statusPmb\": \"Tutup\",\n    \"kelasTersedia\": [\"Reguler\"],\n    \"jurusan\": [\n        {\n            \"namaJurusan\": \"Teknik Informatika\",\n            \"jenjang\": \"S1\",\n            \"akreditasi\": \"B\",\n            \"kelas\": [\n                {\n                    \"name\": \"Reguler\",\n                    \"biayaSPP\": 1\n                },\n                {\n                    \"name\": \"Online\",\n                    \"biayaSPP\": 2\n                }\n            ]\n        },\n        {\n            \"namaJurusan\": \"Bahasa Sunda\",\n            \"jenjang\": \"S1\",\n            \"akreditasi\": \"B\",\n            \"kelas\": [\n                {\n                    \"name\": \"Reguler\",\n                    \"biayaSPP\": 3\n                },\n                {\n                    \"name\": \"Karyawan\",\n                    \"biayaSPP\": 4\n                }\n            ]            \n        }        \n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -242,7 +242,7 @@
 		},
 		{
 			"key": "token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjU0MjIyNzA5LCJleHAiOjE2NTQ3NDExMDl9.1gLnsZgWPphFLGsFJb471lUM8_T2-7lXJ-CWrF3Wiik"
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHJla29tcHVzLmlkIiwiaWF0IjoxNjU0NDM0NDIwLCJleHAiOjE2NTQ5NTI4MjB9.sCOuvaI5wt4wkxz3gOnyEC5PjiQc_-tXqYTiyJ_eKVA"
 		}
 	]
 }

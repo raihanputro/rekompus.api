@@ -28,6 +28,7 @@ function main(){
   app.use(`/${prefix}`, routes)
   
   app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
+    // console.log(err)
     if (isCelebrateError(err)) {
       return res.status(400).json({ error: 'Invalid data' }).end()
     } else if (err instanceof Array && err[0] instanceof ValidationError) {
