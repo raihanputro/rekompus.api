@@ -24,16 +24,16 @@ export class Kampus extends BaseEntity {
     @Column()
     alamat: String
 
-    @Column()
+    @Column({ nullable: true })
     telepon: String
 
-    @Column()
+    @Column({ nullable: true })
     email: String
 
-    @Column()
+    @Column({ nullable: true })
     tahunBerdiri: String
 
-    @Column()
+    @Column({ nullable: true })
     linkPendaftaran: String
 
     @Column()

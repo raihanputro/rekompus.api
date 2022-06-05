@@ -23,9 +23,7 @@ router.get(
   authRequired,
   async (req, res, next) => {
     try {
-      const kampus = await Kampus.find({relations: {
-        jurusan: true        
-      }})
+      const kampus = await Kampus.find({relations: [ 'jurusan', 'jurusan.kelas' ]})
 
       return res.json({ status: 1, data: kampus })
     } catch (e) {
@@ -41,9 +39,7 @@ router.get(
     const kampusId = req.params.id
     try {
       const kampus = await Kampus.find({
-        relations: {
-          jurusan: true,
-        },
+        relations: [ 'jurusan', 'jurusan.kelas' ],
         where: {
           id: kampusId
         }
@@ -60,17 +56,20 @@ router.post(
   '/kampus',
   [
     authRequired,
-    /* celebrate({
+    celebrate({
       body: Joi.object({
         name: Joi.string().required(),
         description: Joi.string().required(),
         city: Joi.string().required(),
         alamat: Joi.string().required(),
-        telepon: Joi.string(),
-        email: Joi.string(),
-        tahunBerdiri: Joi.string(),
-        linkPendaftaran: Joi.string(),
-        jenisKampus: Joi.string(),
+        telepon: Joi.string().allow(null, ''),
+        email: Joi.string().allow(null, ''),
+        tahunBerdiri: Joi.string().allow(null, ''),
+        linkPendaftaran: Joi.string().allow(null, ''),
+        linkFb: Joi.string().allow(null, ''),
+        linkIg: Joi.string().allow(null, ''),
+        linkTwitter: Joi.string().allow(null, ''),
+        jenisKampus: Joi.string().required(),
         akreditasiKampus: Joi.string().required(),
         statusPmb: Joi.string().required(),
         kelasTersedia: Joi.array().items(Joi.string()),
@@ -81,10 +80,10 @@ router.post(
           kelas: Joi.array().items(Joi.object({
             name: Joi.string().required(),
             biayaSPP: Joi.number().required()
-          }))  
+          }))
         }))
       })
-    }) */
+    })
   ],
   async (req, res, next) => {
     let {
