@@ -20,7 +20,6 @@ const authRequired = expressjwt({ secret: process.env.JWT_SECRET, algorithms: ["
 
 router.get(
   '/kampus',
-  authRequired,
   async (req, res, next) => {
     try {
       const kampus = await Kampus.find({relations: [ 'jurusan', 'jurusan.kelas' ]})
@@ -34,7 +33,6 @@ router.get(
 
 router.get(
   '/kampus/:id',
-  authRequired,
   async (req, res, next) => {
     const kampusId = req.params.id
     try {
@@ -193,6 +191,29 @@ router.post(
       await kampus.save()
 
       res.json({ status: 1, data: file })
+    } catch (e) {
+      return next(e)
+    }
+  }
+)
+
+router.delete(
+  '/kampus/:id',
+  authRequired,
+  async (req, res, next) => {
+   let status = 0
+
+    try {
+      const kampus = await Kampus.findOneBy({
+        id: req.params.id
+      })
+ 
+      if (kampus) {
+        await kampus.remove()
+        status = 1
+      }
+      res.json({ status: status })
+
     } catch (e) {
       return next(e)
     }
