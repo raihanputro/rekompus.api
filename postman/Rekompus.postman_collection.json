@@ -101,13 +101,39 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/api/kampus",
+					"raw": "{{baseUrl}}/api/kampus?filter[name]=solo",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
 						"kampus"
+					],
+					"query": [
+						{
+							"key": "filter[name]",
+							"value": "solo"
+						},
+						{
+							"key": "filter[city]",
+							"value": "bandu",
+							"disabled": true
+						},
+						{
+							"key": "filter[jenisKampus]",
+							"value": "PTN",
+							"disabled": true
+						},
+						{
+							"key": "filter[akreditasiKampus]",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "filter[statusPmb]",
+							"value": null,
+							"disabled": true
+						}
 					]
 				}
 			},
