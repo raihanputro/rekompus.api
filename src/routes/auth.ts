@@ -2,7 +2,7 @@ import { Router } from "express"
 import { celebrate, Joi } from 'celebrate'
 import { User } from '../entity/User'
 import * as jwt from "jsonwebtoken"
-import { expressjwt } from "express-jwt"
+import { expressjwt,  Request as JWTRequest } from "express-jwt"
 const router  = Router()
 const authRequired = expressjwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] })
 
@@ -51,7 +51,7 @@ router.post(
       }  
 
       const token = jwt.sign(
-        { email: email }
+        { id: user.id, role: user.role }
         , process.env.JWT_SECRET
         , { expiresIn: process.env.JWT_EXPIRATION, algorithm: 'HS256' }
         );
@@ -67,7 +67,7 @@ router.post(
   '/logout',
   authRequired,
   async (req, res, next) => {
-    const authHeader = req.headers["authorization"]
+    const authHeader = req.headers["authorization"].replace('Bearer ', '')
     jwt.sign(authHeader, "", { expiresIn: 1 } , (logout, err) => {
       if (logout) {
         res.json({ status: 1, message: '' });
@@ -82,14 +82,12 @@ router.post(
 router.get(
   '/me',
   authRequired,
-  async (req, res, next) => {
-    const authHeader = req.headers["authorization"].replace('Bearer ', '')
-    const decoded = <any>jwt.verify(authHeader, process.env.JWT_SECRET)
+  async (req: JWTRequest, res, next) => {
     const user = await User.find(
       {
         select: ['id', 'name', 'email'],
         where: {
-          email: decoded.email
+          id: req.auth.id
         }
       })
     res.json({ status: 1, data: user });

@@ -24,6 +24,9 @@ export class User extends BaseEntity {
     @IsNotEmpty()
     password: String
 
+    @Column({ nullable: true })
+    role: String
+    
     @ManyToMany(() => Kampus)
     @JoinTable()
     kampus: Kampus[]

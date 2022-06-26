@@ -1,7 +1,6 @@
 import { Router } from "express"
 import { celebrate, Joi } from 'celebrate'
-import { expressjwt } from "express-jwt"
-import * as jwt from "jsonwebtoken"
+import { expressjwt,  Request as JWTRequest } from "express-jwt"
 import { AppDataSource } from '../data-source'
 import { Kampus } from '../entity/Kampus'
 import { User } from "../entity/User"
@@ -12,9 +11,7 @@ const authRequired = expressjwt({ secret: process.env.JWT_SECRET, algorithms: ["
 router.get(
   '/favorite',
   authRequired,
-  async (req, res, next) => {
-    const authHeader = req.headers["authorization"].replace('Bearer ', '')
-    const decoded = <any>jwt.verify(authHeader, process.env.JWT_SECRET)
+  async (req: JWTRequest, res, next) => {
     const user = await User.find(
       {
         select: ['id', 'name', 'email'],
@@ -22,13 +19,12 @@ router.get(
           kampus: true,
         },
         where: {
-          email: decoded.email
+          id: req.auth.id
         }
       })
     res.json({ status: 1, data: user });
   }
 )
-
 
 router.post(
   '/favorite',
@@ -40,10 +36,8 @@ router.post(
       })
     })
   ],
-  async (req, res, next) => {
-    const authHeader = req.headers["authorization"].replace('Bearer ', '')
-    const decoded = <any>jwt.verify(authHeader, process.env.JWT_SECRET)
-    const user = await User.findOneBy({ email: decoded.email })
+  async (req: JWTRequest , res, next) => {
+    const user = await User.findOneBy({ id: req.auth.id })
     
     let { kampus_id } = req.body
     let result = 0
@@ -63,10 +57,9 @@ router.post(
   }
 )
 
-
 router.delete(
   '/favorite',
-  [
+  [ 
     authRequired,
     celebrate({
       body: Joi.object({
@@ -74,11 +67,9 @@ router.delete(
       })
     })
   ],
-  async (req, res, next) => {
+  async (req: JWTRequest, res, next) => {
     const { kampus_id } = req.body
-    const authHeader = req.headers["authorization"].replace('Bearer ', '')
-    const decoded = <any>jwt.verify(authHeader, process.env.JWT_SECRET)
-    const user = await User.findOneBy({ email: decoded.email })
+    const user = await User.findOneBy({ id: req.auth.id })
     const kampus = await Kampus.findOneBy({ id: kampus_id })
     
     let status = 0
