@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { celebrate, Joi } from 'celebrate'
 import multer from 'multer'
+import { isRole } from '../middlewares/isRole'
 import { expressjwt } from "express-jwt"
 import { Like } from "typeorm"
 import { Kampus } from '../entity/Kampus'
@@ -71,6 +72,7 @@ router.post(
   '/kampus',
   [
     authRequired,
+    isRole(['ADMIN']),
     celebrate({
       body: Joi.object({
         name: Joi.string().required(),
@@ -151,6 +153,7 @@ router.put(
   '/kampus/:id',
   [
     authRequired,
+    isRole(['ADMIN']),
     celebrate({
       body: Joi.object({
         name: Joi.string().required(),
@@ -189,6 +192,7 @@ router.post(
   '/kampus/:id/pictureid',
   [
     authRequired, 
+    isRole(['ADMIN']),
     upload.single('pictureid')
   ],
   async (req, res, next) => {
@@ -217,6 +221,7 @@ router.post(
 router.delete(
   '/kampus/:id',
   authRequired,
+  isRole(['ADMIN']),
   async (req, res, next) => {
    let status = 0
 
