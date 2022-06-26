@@ -78,6 +78,24 @@
 			"response": []
 		},
 		{
+			"name": "api/me",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/me",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "api/kampus",
 			"request": {
 				"method": "GET",
@@ -101,14 +119,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/api/kampus/b11a6d5f-f2f0-4c09-998d-1272599e9138",
+					"raw": "{{baseUrl}}/api/kampus/id",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
 						"kampus",
-						"b11a6d5f-f2f0-4c09-998d-1272599e9138"
+						"id"
 					]
 				}
 			},
@@ -218,6 +236,78 @@
 						"kampus",
 						"1",
 						"pictureid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/favorite",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/favorite",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/favorite",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"kampus_id\": \"3f2c833c-6960-4bfe-a521-662de5c95fcc\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/favorite",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/favorite",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"kampus_id\": \"3f2c833c-6960-4bfe-a521-662de5c95fcc\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/favorite",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"favorite"
 					]
 				}
 			},

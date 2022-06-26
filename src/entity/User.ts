@@ -1,6 +1,7 @@
-import { Index, Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm"
+import { Index, Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToMany, JoinTable } from "typeorm"
 import { Length, IsNotEmpty, IsEmail } from "class-validator"
 import bcrypt from 'bcryptjs'
+import { Kampus } from "./Kampus"
 
 @Entity()
 export class User extends BaseEntity {
@@ -22,6 +23,10 @@ export class User extends BaseEntity {
     @Column()
     @IsNotEmpty()
     password: String
+
+    @ManyToMany(() => Kampus)
+    @JoinTable()
+    kampus: Kampus[]
 
     @CreateDateColumn()
     createdAt : String
