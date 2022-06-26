@@ -3,8 +3,8 @@ import { celebrate, Joi } from 'celebrate'
 import { User } from '../entity/User'
 import * as jwt from "jsonwebtoken"
 import { expressjwt } from "express-jwt"
-
 const router  = Router()
+const authRequired = expressjwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] })
 
 router.post(
   '/register',
@@ -65,7 +65,7 @@ router.post(
 
 router.post(
   '/logout',
-  expressjwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }),
+  authRequired,
   async (req, res, next) => {
     const authHeader = req.headers["authorization"]
     jwt.sign(authHeader, "", { expiresIn: 1 } , (logout, err) => {
@@ -76,6 +76,23 @@ router.post(
         res.json({ status: 0, message: err });
       }
     })
+  }
+)
+
+router.get(
+  '/me',
+  authRequired,
+  async (req, res, next) => {
+    const authHeader = req.headers["authorization"].replace('Bearer ', '')
+    const decoded = <any>jwt.verify(authHeader, process.env.JWT_SECRET)
+    const user = await User.find(
+      {
+        select: ['id', 'name', 'email'],
+        where: {
+          email: decoded.email
+        }
+      })
+    res.json({ status: 1, data: user });
   }
 )
 
