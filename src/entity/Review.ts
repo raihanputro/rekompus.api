@@ -6,7 +6,8 @@ import { Entity,
          UpdateDateColumn,
          Tree,
          TreeChildren,
-         TreeParent
+         TreeParent,
+         BaseEntity
        } from "typeorm"
 import { IsNotEmpty } from "class-validator"
 import { Kampus } from "./Kampus"
@@ -14,14 +15,14 @@ import { User } from "./User"
 
 @Entity()
 @Tree("nested-set")
-export class Review {
+export class Review extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number
 
     @Column()
     @IsNotEmpty()
-    name: String
+    comment: String
 
     @ManyToOne(() => Kampus, (kampus) => kampus.review, { onDelete: 'CASCADE' })
     kampus: Kampus
