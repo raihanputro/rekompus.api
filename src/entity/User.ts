@@ -1,7 +1,19 @@
-import { Index, Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToMany, JoinTable } from "typeorm"
+import { Index,
+         Entity,
+         PrimaryGeneratedColumn,
+         Column,
+         BaseEntity,
+         CreateDateColumn,
+         UpdateDateColumn,
+         BeforeInsert,
+         ManyToMany,
+         JoinTable, 
+         OneToMany} from "typeorm"
 import { Length, IsNotEmpty, IsEmail } from "class-validator"
 import bcrypt from 'bcryptjs'
 import { Kampus } from "./Kampus"
+import { Review } from "./Review"
+// import { Review } from "./Review"
 
 @Entity()
 export class User extends BaseEntity {
@@ -30,6 +42,9 @@ export class User extends BaseEntity {
     @ManyToMany(() => Kampus)
     @JoinTable()
     kampus: Kampus[]
+
+    @OneToMany(() => Review, (review) => review.user, { cascade: true })
+    review: Review[]
 
     @CreateDateColumn()
     createdAt : String

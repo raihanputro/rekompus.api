@@ -4,6 +4,7 @@ import { User } from './entity/User'
 import { Jurusan } from './entity/Jurusan'
 import { JurusanKelas } from './entity/JurusanKelas'
 import { Kampus } from './entity/Kampus'
+import { Review } from './entity/Review'
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -14,7 +15,7 @@ export const AppDataSource = new DataSource({
     database: "rekompus",
     synchronize: true,
     logging: false,
-    entities: [User, Jurusan, Kampus, JurusanKelas],
+    entities: [User, Jurusan, Kampus, JurusanKelas, Review],
     migrations: [],
     subscribers: []
 })

@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm"
 import { IsNotEmpty } from "class-validator"
 import { Jurusan } from './Jurusan'
+import { Review } from './Review'
 
 @Entity()
 export class Kampus extends BaseEntity {
@@ -58,7 +59,10 @@ export class Kampus extends BaseEntity {
     linkTwitter: String
 
     @OneToMany(() => Jurusan, (jurusan) => jurusan.kampus, { cascade: true })
-    jurusan: Jurusan[]    
+    jurusan: Jurusan[]
+
+    @OneToMany(() => Review, (review) => review.kampus, { cascade: true })
+    review: Review[]    
 
     @CreateDateColumn()
     createdAt : String
