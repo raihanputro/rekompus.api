@@ -1,9 +1,8 @@
 import { Router } from "express"
 import { celebrate, Joi } from 'celebrate'
-// import jwt from "jsonwebtoken"
 import multer from 'multer'
 import { expressjwt } from "express-jwt"
-
+import { Like } from "typeorm"
 import { Kampus } from '../entity/Kampus'
 
 const router  = Router()
@@ -21,8 +20,26 @@ const authRequired = expressjwt({ secret: process.env.JWT_SECRET, algorithms: ["
 router.get(
   '/kampus',
   async (req, res, next) => {
+    const filters = req.query
+    let whereParam = <any>{}
+
+    if (filters.filter) {
+      for (const key in <any>filters.filter) {
+        if (key === 'name' || key === 'city') {
+          whereParam[key] = Like(`%${filters.filter[key]}%`)
+        } else {
+          whereParam[key] = filters.filter[key]
+        }
+      }
+    }
+
     try {
-      const kampus = await Kampus.find({relations: [ 'jurusan', 'jurusan.kelas' ]})
+      const kampus = await Kampus.find(
+        {
+          relations: [ 'jurusan', 'jurusan.kelas' ],
+          where: whereParam
+        }
+      )
 
       return res.json({ status: 1, data: kampus })
     } catch (e) {
@@ -147,7 +164,7 @@ router.put(
   ],
   async (req, res, next) => {
     let { name, description, city, akreditasiKampus, statusPmb, kelasTersedia } = req.body
-    
+
     try {
       const kampus = await Kampus.findOneBy({
         id: req.params.id
