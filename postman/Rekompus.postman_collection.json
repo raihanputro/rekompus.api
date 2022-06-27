@@ -101,7 +101,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/api/kampus?filter[name]=solo",
+					"raw": "{{baseUrl}}/api/kampus",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -112,7 +112,8 @@
 					"query": [
 						{
 							"key": "filter[name]",
-							"value": "solo"
+							"value": "solo",
+							"disabled": true
 						},
 						{
 							"key": "filter[city]",
@@ -165,7 +166,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Universitas Solo Raya\",\n    \"description\": \"Keterangan Solo\",\n    \"city\": \"Solo\",\n    \"alamat\": \"Alamat di solo\",\n    \"telepon\": \"\",\n    \"email\": \"\",\n    \"tahunBerdiri\": \"\",\n    \"linkPendaftaran\": \"\",\n    \"linkFb\": \"-\",\n    \"linkIg\": \"\",\n    \"linkTwitter\": \"\",\n    \"jenisKampus\": \"PTN\",\n    \"akreditasiKampus\": \"C+\",\n    \"statusPmb\": \"Tutup\",\n    \"kelasTersedia\": [\"Reguler\"],\n    \"jurusan\": [\n        {\n            \"namaJurusan\": \"Teknik Informatika\",\n            \"jenjang\": \"S1\",\n            \"akreditasi\": \"B\",\n            \"kelas\": [\n                {\n                    \"name\": \"Reguler\",\n                    \"biayaSPP\": 1\n                },\n                {\n                    \"name\": \"Online\",\n                    \"biayaSPP\": 2\n                }\n            ]\n        },\n        {\n            \"namaJurusan\": \"Bahasa Sunda\",\n            \"jenjang\": \"S1\",\n            \"akreditasi\": \"B\",\n            \"kelas\": [\n                {\n                    \"name\": \"Reguler\",\n                    \"biayaSPP\": 3\n                },\n                {\n                    \"name\": \"Karyawan\",\n                    \"biayaSPP\": 4\n                }\n            ]            \n        }        \n    ]\n}",
+					"raw": "{\n    \"name\": \"Universitas Airlangga\",\n    \"description\": \"Keterangan airlangga\",\n    \"city\": \"Solo\",\n    \"alamat\": \"Alamat di solo\",\n    \"telepon\": \"\",\n    \"email\": \"\",\n    \"tahunBerdiri\": \"\",\n    \"linkPendaftaran\": \"\",\n    \"linkFb\": \"-\",\n    \"linkIg\": \"\",\n    \"linkTwitter\": \"\",\n    \"jenisKampus\": \"PTN\",\n    \"akreditasiKampus\": \"C+\",\n    \"statusPmb\": \"Tutup\",\n    \"kelasTersedia\": [\"Reguler\"],\n    \"jurusan\": [\n        {\n            \"namaJurusan\": \"Teknik Informatika\",\n            \"jenjang\": \"S1\",\n            \"akreditasi\": \"B\",\n            \"prospekKarir\": \"prospek karir jurusan teknik informatika\",\n            \"mataKuliah\": \"mata kuliah jurusan teknik informatika\",\n            \"kelas\": [\n                {\n                    \"name\": \"Reguler\",\n                    \"biayaSPP\": 1\n                },\n                {\n                    \"name\": \"Online\",\n                    \"biayaSPP\": 2\n                }\n            ]\n        },\n        {\n            \"namaJurusan\": \"Bahasa Jawa\",\n            \"jenjang\": \"S1\",\n            \"akreditasi\": \"B\",\n            \"prospekKarir\": \"prospek karir jurusan bahasa Jawa\",\n            \"mataKuliah\": \"mata kuliah jurusan bahasa Jawa\",\n            \"kelas\": [\n                {\n                    \"name\": \"Reguler\",\n                    \"biayaSPP\": 3\n                },\n                {\n                    \"name\": \"Karyawan\",\n                    \"biayaSPP\": 4\n                }\n            ]            \n        }        \n    ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -365,7 +366,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"kampus_id\": \"3f2c833c-6960-4bfe-a521-662de5c95fcc\",\n    \"comment\": \"Ini komentar saya (2)\"\n}",
+					"raw": "{\n    \"id\": 0,\n    \"kampus_id\": \"ca1234ac-15b1-4b1a-82bb-a917b3d4e823\",\n    \"comment\": \"Ini komentar lain saya (1)\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

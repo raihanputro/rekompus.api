@@ -14,7 +14,7 @@ import { Kampus } from "./Kampus"
 import { User } from "./User"
 
 @Entity()
-@Tree("nested-set")
+@Tree("materialized-path")
 export class Review extends BaseEntity {
 
     @PrimaryGeneratedColumn()
@@ -24,7 +24,7 @@ export class Review extends BaseEntity {
     @IsNotEmpty()
     comment: String
 
-    @ManyToOne(() => Kampus, (kampus) => kampus.review, { onDelete: 'CASCADE' })
+    @ManyToOne(() => Kampus, (kampus) => kampus.review)
     kampus: Kampus
 
     @ManyToOne(() => User, (user) => user.review)
@@ -40,5 +40,5 @@ export class Review extends BaseEntity {
     children: Review[]
 
     @TreeParent()
-    parent: Review    
+    parent: Review        
 }
