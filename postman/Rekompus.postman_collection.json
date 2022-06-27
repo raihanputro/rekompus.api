@@ -338,6 +338,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "api/review",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/review/3f2c833c-6960-4bfe-a521-662de5c95fcc",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"review",
+						"3f2c833c-6960-4bfe-a521-662de5c95fcc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/review",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"kampus_id\": \"3f2c833c-6960-4bfe-a521-662de5c95fcc\",\n    \"comment\": \"Ini komentar saya (2)\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/review",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"review"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
