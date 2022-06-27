@@ -94,6 +94,8 @@ router.post(
           namaJurusan: Joi.string().required(),
           jenjang: Joi.string().required(),
           akreditasi: Joi.string().required(),
+          prospekKarir: Joi.string(),
+          mataKuliah: Joi.string(),
           kelas: Joi.array().items(Joi.object({
             name: Joi.string().required(),
             biayaSPP: Joi.number().required()
