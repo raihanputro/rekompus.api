@@ -199,7 +199,7 @@ router.post(
     
     try {
       const file = req.file.path
-      console.log(file)
+
       if (!file) {
         res.json({ status: 0, message: "No File is selected." })
       }

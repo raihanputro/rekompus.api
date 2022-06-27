@@ -85,7 +85,7 @@ router.get(
   async (req: JWTRequest, res, next) => {
     const user = await User.find(
       {
-        select: ['id', 'name', 'email'],
+        select: ['id', 'name', 'email', 'role'],
         where: {
           id: req.auth.id
         }
