@@ -6,6 +6,8 @@ import helmet from 'helmet'
 import cors from 'cors'
 import * as bodyParser from 'body-parser'
 import { isCelebrateError } from 'celebrate'
+import * as swaggerUi from 'swagger-ui-express'
+import swaggerJsDoc from 'swagger-jsdoc'
 import { AppDataSource } from './data-source'
 import routes from './routes'
 
@@ -13,6 +15,24 @@ function main(){
   const port = process.env.PORT || 3000
   const prefix = process.env.ENDPOINT_PREFIX || 'api'
   const app = express()
+  const swaggerDefinition = {
+    openapi: '3.0.0',
+    info: {
+      title: "Dokumentasi REKOMPUS API",
+      description: "Lorem ipsum dorsi amet..."
+    },
+    servers: [
+      {
+        url: 'http://localhost:3000/api',
+        description: 'local server',
+      },
+    ],
+  }
+  
+  const swaggerOptions = {
+    swaggerDefinition,
+    apis: ['./src/routes/*.ts']
+  }
 
   app.use(cors({
     origin: '*'
@@ -26,7 +46,8 @@ function main(){
   app.use("/images", express.static('./uploads'))
   app.use('/', routes)
   app.use(`/${prefix}`, routes)
-  
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(swaggerOptions)))
+
   app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
     // console.log(err)
     if (isCelebrateError(err)) {

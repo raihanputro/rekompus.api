@@ -6,6 +6,33 @@ import { expressjwt,  Request as JWTRequest } from "express-jwt"
 const router  = Router()
 const authRequired = expressjwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] })
 
+/**
+* @swagger
+* /register:
+*   post:
+*     summary: Pendaftaran user baru
+*     tags:
+*       - user
+*   parameters:
+*     - in: path
+*       name: email
+*       required: true 
+*       schema:
+*         type: string
+*       description: Alamat email
+*     - in: path
+*       name: name
+*       required: true
+*       schema:
+*         type: string
+*       description: nama lengkap
+*     - in: path
+*       name: password
+*       required: true
+*       schema:
+*         type: string
+*       description: Password
+*/
 router.post(
   '/register',
   celebrate({
@@ -28,6 +55,47 @@ router.post(
   }
 )
 
+/**
+ * @swagger
+ *
+ * /login:
+ *   post:
+ *     summary: Login ke aplikasi
+ *     tags:
+ *       - user
+ *     consumes:
+ *        - application/json
+ *     produces:
+ *        - application/json
+ *     parameters:
+ *       - in: body
+ *         name: body
+ *         type: object
+ *         description: login object
+ *         required: true 
+ *         schema:
+ *            type: object
+ *            properties:   
+ *              email:
+ *                type: string
+ *              password:
+ *                type: string
+ *     responses:
+ *        200:
+ *            content:
+ *                application/json:
+ *                    schema:
+ *                        type: object
+ *                        properties:
+ *                          status:
+ *                            type: number
+ *                            description: 1 = sukses, 0 = error
+ *                          message:
+ *                            type: string
+ *                          data:
+ *                            type: string
+ *                            description: jika sukses berisi jwt token
+ */
 router.post(
   '/login',
   celebrate({
@@ -56,7 +124,7 @@ router.post(
         , { expiresIn: process.env.JWT_EXPIRATION, algorithm: 'HS256' }
         );
 
-      return res.json({ status: 1, data: token });
+      return res.json({ status: 1, data: token, message: '' });
     } catch (e) {
       return next(e);
     }    
