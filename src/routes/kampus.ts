@@ -49,6 +49,23 @@ router.get(
   }
 )
 
+/**
+ * @swagger
+ * /kampus/{id}:
+ *   get:
+ *     summary: Ambil data detail kampus.
+ *     tags:
+ *       - kampus 
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: id kampus
+ *         required: true 
+ *         type: string 
+ *     responses:
+ *       200:
+ *         description: data kampus
+ */
 router.get(
   '/kampus/:id',
   async (req, res, next) => {
