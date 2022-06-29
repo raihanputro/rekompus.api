@@ -131,6 +131,30 @@ router.post(
   }
 )
 
+
+/**
+ * @swagger
+ *
+ * /logout:
+ *   post:
+ *     summary: Logout & hapus/paksa invalidate jwt token
+ *     tags:
+ *       - user
+ *     produces:
+ *        - application/json
+ *     responses:
+ *       200:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                status:
+ *                  type: number
+ *                  description: 1 = sukses, 0 = error
+ *                message:
+ *                  type: string
+ */
 router.post(
   '/logout',
   authRequired,
@@ -147,6 +171,20 @@ router.post(
   }
 )
 
+/**
+ * @swagger
+ *
+ * /me:
+ *   get:
+ *     summary: Info user yang sudah login
+ *     tags:
+ *       - user
+ *     produces:
+ *        - application/json
+ *     responses:
+ *       200:
+ *         description: id, name, email, role
+ */
 router.get(
   '/me',
   authRequired,
