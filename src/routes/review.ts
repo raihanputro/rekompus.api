@@ -16,7 +16,7 @@ router.get(
     const kampusId = req.params.id
     const parent = await Review.findOneBy({ kampus: { id: kampusId }  })
     // const children = await AppDataSource.manager.getTreeRepository(Review).findDescendantsTree(parent) // tree
-    const children = await AppDataSource.manager.getTreeRepository(Review).findDescendants(parent) // flat
+    const children = await AppDataSource.manager.getTreeRepository(Review).findDescendants(parent, {  relations: ['user']}) // flat
     res.json({ status: 1, data: children });
   }
 )

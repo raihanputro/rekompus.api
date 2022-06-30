@@ -8,12 +8,12 @@ import { Index,
          BeforeInsert,
          ManyToMany,
          JoinTable, 
-         OneToMany} from "typeorm"
+         OneToMany
+       } from "typeorm"
 import { Length, IsNotEmpty, IsEmail } from "class-validator"
 import bcrypt from 'bcryptjs'
 import { Kampus } from "./Kampus"
 import { Review } from "./Review"
-// import { Review } from "./Review"
 
 @Entity()
 export class User extends BaseEntity {
