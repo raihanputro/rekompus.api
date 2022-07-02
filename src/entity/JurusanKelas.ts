@@ -16,7 +16,7 @@ export class JurusanKelas extends BaseEntity {
     @IsNotEmpty()
     biayaSPP: number
 
-    @ManyToOne(() => Jurusan, (jurusan) => jurusan.kelas, { onDelete: 'CASCADE' })
+    @ManyToOne(() => Jurusan, (jurusan) => jurusan.kelas, {onDelete: 'CASCADE'})
     jurusan: Jurusan
 
     @CreateDateColumn()

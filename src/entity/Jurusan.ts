@@ -27,10 +27,10 @@ export class Jurusan extends BaseEntity {
     @Column("text", { nullable: true })
     prospekKarir: String
 
-    @OneToMany(() => JurusanKelas, (kelas) => kelas.jurusan, { cascade: true })
+    @OneToMany(() => JurusanKelas, (kelas) => kelas.jurusan, {onDelete: 'CASCADE'})
     kelas: JurusanKelas[]
 
-    @ManyToOne(() => Kampus, (kampus) => kampus.jurusan, { onDelete: 'CASCADE' })
+    @ManyToOne(() => Kampus, (kampus) => kampus.jurusan, {onDelete: 'CASCADE'})
     kampus: Kampus
 
     @CreateDateColumn()

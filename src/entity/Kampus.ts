@@ -13,7 +13,7 @@ export class Kampus extends BaseEntity {
     @IsNotEmpty()
     name: String
 
-    @Column()
+    @Column("text")
     description: String
 
     @Column({ nullable: true })
@@ -58,10 +58,10 @@ export class Kampus extends BaseEntity {
     @Column()
     linkTwitter: String
 
-    @OneToMany(() => Jurusan, (jurusan) => jurusan.kampus, { cascade: true })
+    @OneToMany(() => Jurusan, (jurusan) => jurusan.kampus, { onDelete: 'CASCADE'  })
     jurusan: Jurusan[]
 
-    @OneToMany(() => Review, (review) => review.kampus, { cascade: true })
+    @OneToMany(() => Review, (review) => review.kampus, { onDelete: 'CASCADE'  })
     review: Review[]    
 
     @CreateDateColumn()

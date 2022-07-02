@@ -36,14 +36,14 @@ export class User extends BaseEntity {
     @IsNotEmpty()
     password: String
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, default: 'USER' })
     role: String
     
     @ManyToMany(() => Kampus)
     @JoinTable()
     kampus: Kampus[]
 
-    @OneToMany(() => Review, (review) => review.user, { cascade: true })
+    @OneToMany(() => Review, (review) => review.user)
     review: Review[]
 
     @CreateDateColumn()

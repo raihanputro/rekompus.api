@@ -13,7 +13,7 @@ export const AppDataSource = new DataSource({
     username: "root",
     password: "adminZ",
     database: "rekompus",
-    synchronize: false,
+    synchronize: true,
     logging: false,
     entities: [User, Jurusan, Kampus, JurusanKelas, Review],
     migrations: [],

@@ -24,7 +24,7 @@ export class Review extends BaseEntity {
     @IsNotEmpty()
     comment: String
 
-    @ManyToOne(() => Kampus, (kampus) => kampus.review)
+    @ManyToOne(() => Kampus, (kampus) => kampus.review, {onDelete: 'CASCADE'})
     kampus: Kampus
 
     @ManyToOne(() => User, (user) => user.review)
